@@ -1,0 +1,1 @@
+### the process was about login and get loginsession from naver.com
