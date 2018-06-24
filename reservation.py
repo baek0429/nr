@@ -15,6 +15,10 @@ courtNumbers = {
 	'3' : '2633373',
 	'4' : '2652587',
 	'5' : '2652589',
+	'6' : '2652590',
+	'7' : '2652591',
+	'8' : '2652592',}
+
 # chrome_options.add_argument("--headless")
 chrome_options.add_argument("--window-size=1920x1080")
 browser = webdriver.Chrome(chrome_options=chrome_options, executable_path='chromedriver')
@@ -37,10 +41,6 @@ browser.find_element_by_class_name('chk_txt').click()
 
 # submit the form and return the result
 browser.find_element_by_class_name('btn').click()
-
-	'6' : '2652590',
-	'7' : '2652591',
-	'8' : '2652592',}
 
 #Changes Monthly, hard to get it, serverside app.
 slotNumbers = '1234567'
