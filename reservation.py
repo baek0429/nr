@@ -23,8 +23,9 @@ courtNumbers = {
 chrome_options.add_argument("--window-size=1920x1080")
 browser = webdriver.Chrome(chrome_options=chrome_options, executable_path='chromedriver')
 browser.get(site)
-delay = 3 # seconds
 
+# for test only
+delay = 3 # seconds
 browser.implicitly_wait(delay)
 
 # wait until the page is loaded
