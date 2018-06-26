@@ -26,13 +26,21 @@ browser = webdriver.Chrome(chrome_options=chrome_options, executable_path='chrom
 browser.get(url)
 
 # wait until the page is loaded
-element = WebDriverWait(browser, 5).until(
-    lambda x: x.find_element_by_id('tel'))
+try:
+	element = WebDriverWait(browser, 5).until(
+	    lambda x: x.find_element_by_id('tel'))
+except Exception as e :
+	print e
+	pass
 
 # get information(email,name,phonenumber) from reserveInfo
-mobile = browser.find_element_by_id('tel').send_keys(infoArray[4])
-email = browser.find_element_by_id('name').send_keys(infoArray[2])
-username = browser.find_element_by_name('email').send_keys(infoArray[3])
+try:
+	browser.find_element_by_id('tel').send_keys(infoArray[4])
+	browser.find_element_by_id('name').send_keys(infoArray[2])
+	browser.find_element_by_name('email').send_keys(infoArray[3])
+except Exception as e :
+	print e
+	pass
 
 # click the agree all button
 browser.find_element_by_class_name('chk_txt').click()

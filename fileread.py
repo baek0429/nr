@@ -1,5 +1,4 @@
-import json
-
+import codecs
 
 # Court Number Array
 courtNumbers = {
@@ -17,7 +16,7 @@ courtNumbers = {y:x for x,y in courtNumbers.iteritems()}
 def getReservationInfo(fileName):
 	# file read
 	try:
-		f = open(fileName,'r')
+		f = codecs.open(fileName,'r',encoding='utf8')
 		contents = f.read()
 		infoArray = [x.strip() for x in contents.split(',')]
 		courtNumber = courtNumbers[infoArray[0]]
