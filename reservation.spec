@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['reservation.py'],
-             pathex=['/home/csbaek/Desktop/NR/nr'],
+             pathex=['Z:\\home\\csbaek\\Desktop\\NR\\nr'],
              binaries=[],
              datas=[],
              hiddenimports=[],

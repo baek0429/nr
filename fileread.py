@@ -26,6 +26,18 @@ def getReservationInfo(fileName):
 	except Exception as e:
 		print e
 
+def getLoginInfo(fileName):
+	# file read
+	try:
+		f = codecs.open(fileName,'r',encoding='utf8')
+		contents = f.read()
+		infoArray = [x.strip() for x in contents.split(',')]
+		print "Reservation ID: " + infoArray[1]
+		return infoArray
+	except Exception as e:
+		print e
+
 
 if __name__ == "__main__":
 	getReservationInfo('info.txt')
+	getLoginInfo('login.txt')
