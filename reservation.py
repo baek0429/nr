@@ -36,7 +36,8 @@ else :
 
 # begin login
 browser.get(loginUrl)
-element = WebDriverWait(browser, 5).until(lambda x: x.find_element_by_name('id') and x.find_element_by_name('pw')) 
+
+browser.implicitly_wait(3)
 browser.find_element_by_name('id').send_keys(loginInfoArray[1])
 browser.find_element_by_name('pw').send_keys(loginInfoArray[2])
 browser.find_element_by_xpath('//*[@id="frmNIDLogin"]/fieldset/input').click()
@@ -47,17 +48,17 @@ while True:
 		# go to reservation page
 		browser.get(url)
 		# wait until the page is loaded
-		element = WebDriverWait(browser, 10).until(lambda x:
-			x.find_element_by_class_name('service_info_dsc')
+		element = WebDriverWait(browser, 5).until(lambda x:
+			x.find_element_by_class_name('service_info_dsc').text
 			and x.find_element_by_class_name('chk_txt')
 			and x.find_element_by_class_name('btn')
 			and x.find_element_by_class_name('summary_wrap'))
 		serviceInfo = browser.find_element_by_class_name('service_info_dsc').text
 		if u'잔여 0' in serviceInfo:
-			print serviceInfo
+			print serviceInfo.encode('utf-8')
 			pass
 		if u'잔여 1' in serviceInfo:
-			print serviceInfo
+			print serviceInfo.encode('utf-8')
 			browser.find_element_by_class_name('chk_txt').click()
 			# submit the form and return the result
 			browser.find_element_by_class_name('btn').click()
@@ -65,4 +66,4 @@ while True:
 		browser.refresh()
 	except Exception as e:
 		print e
-		break
+		pass

@@ -19,7 +19,7 @@ def getReservationInfo(fileName):
 		f = codecs.open(fileName,'r',encoding='utf8')
 		contents = f.read()
 		infoArray = [x.strip() for x in contents.split(',')]
-		courtNumber = courtNumbers[infoArray[0]]
+		courtNumber = infoArray[0]
 		timeID = infoArray[1]
 		print("court number :" +  courtNumber + ", TimeID:"+ timeID)
 		return infoArray
