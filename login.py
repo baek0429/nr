@@ -32,7 +32,7 @@ class NaverLogin:
 		if closeIt:
 			driver.close()
 			driver.quit()
-		# print 'result: ' ,  cookies
+		print 'result: ' ,  cookies
 		return cookies
 
 if __name__ == "__main__":
