@@ -28,12 +28,11 @@ if os.name =='nt':
 else :
 	browser = webdriver.Chrome(chrome_options=chrome_options, executable_path='chromedriver')
 
-browser.get(url)
-
 # get information(email,name,phonenumber) from reserveInfo
 while True:
 	try:
 		# wait until the page is loaded
+		browser.get(url)
 		element = WebDriverWait(browser, 5).until(lambda x: x.find_element_by_id('tel') 
 			and x.find_element_by_class_name('service_info_dsc')
 			and x.find_element_by_id('name')
@@ -41,20 +40,17 @@ while True:
 		# element = WebDriverWait(browser, 5).until(lambda y: y.find_element_by_class_name('service_info_dsc'))
 		serviceInfo = browser.find_element_by_class_name('service_info_dsc').text
 		if u'잔여 1' in serviceInfo:
+			# complete the form
+			browser.find_element_by_id('tel').send_keys(infoArray[4])
+			browser.find_element_by_id('name').send_keys(infoArray[2])
+			browser.find_element_by_name('email').send_keys(infoArray[3])
+			# click the agree all button
+			browser.find_element_by_class_name('chk_txt').click()
+			# submit the form and return the result
+			browser.find_element_by_class_name('btn').click()
 			break
 		# if not available, refresh()
 		browser.refresh()
 	except Exception as e:
 		print e
-		break
-
-# complete the form
-browser.find_element_by_id('tel').send_keys(infoArray[4])
-browser.find_element_by_id('name').send_keys(infoArray[2])
-browser.find_element_by_name('email').send_keys(infoArray[3])
-# click the agree all button
-browser.find_element_by_class_name('chk_txt').click()
-# submit the form and return the result
-browser.find_element_by_class_name('btn').click()
-
-input("press enter to close")
+		pass
