@@ -42,13 +42,19 @@ browser.find_element_by_name('id').send_keys(loginInfoArray[1])
 browser.find_element_by_name('pw').send_keys(loginInfoArray[2])
 browser.find_element_by_xpath('//*[@id="frmNIDLogin"]/fieldset/input').click()
 
-
 while True:
 	try:
 		# go to reservation page
 		browser.get(url)
+		# browser.get(notReadyDirectedURL)
+
+		# if didn't get the right page (the web site not fully ready)
+		currentUrl = browser.current_url
+		if currentUrl != url:
+			print currentUrl + ' >> page is NOT ready'
+			continue
 		# wait until the page is loaded
-		element = WebDriverWait(browser, 5).until(lambda x:
+		element = WebDriverWait(browser, 2).until(lambda x:
 			x.find_element_by_class_name('service_info_dsc').text
 			and x.find_element_by_class_name('chk_txt')
 			and x.find_element_by_class_name('btn')
@@ -56,7 +62,7 @@ while True:
 		serviceInfo = browser.find_element_by_class_name('service_info_dsc').text
 		if u'잔여 0' in serviceInfo:
 			print serviceInfo.encode('utf-8')
-			pass
+			continue
 		if u'잔여 1' in serviceInfo:
 			print serviceInfo.encode('utf-8')
 			browser.find_element_by_class_name('chk_txt').click()
