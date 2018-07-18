@@ -9,6 +9,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import NoSuchElementException        
+
 
 
 # getReservationInfo() from fileread module, returns array [court,time,name,email,mobile]
@@ -24,7 +26,7 @@ loginUrl = loginInfoArray[0]
 # begin chrome options
 chrome_options = Options()
 
-# chrome_options.add_argument("--headless"), By OS
+chrome_options.add_argument("--headless")
 chrome_options.add_argument("--window-size=1920x1080")
 chrome_options.add_argument("--incognito")
 
@@ -42,17 +44,27 @@ browser.find_element_by_name('id').send_keys(loginInfoArray[1])
 browser.find_element_by_name('pw').send_keys(loginInfoArray[2])
 browser.find_element_by_xpath('//*[@id="frmNIDLogin"]/fieldset/input').click()
 
+element = WebDriverWait(browser,1)
+
+# Function
+
+def check_exist_by_classname(classname):
+    try:
+        browser.find_element_by_class_name(classname)
+    except NoSuchElementException:
+        return False
+    return True
+
 while True:
 	try:
 		# go to reservation page
 		browser.get(url)
-		# browser.get(notReadyDirectedURL)
 
-		# if didn't get the right page (the web site not fully ready)
-		currentUrl = browser.current_url
-		if currentUrl != url:
-			print currentUrl + ' >> page is NOT ready'
+		# check wheather the 
+		if check_exist_by_classname("store_dsc"):
+			print "Reload the Page"
 			continue
+			
 		# wait until the page is loaded
 		element = WebDriverWait(browser, 2).until(lambda x:
 			x.find_element_by_class_name('service_info_dsc').text
